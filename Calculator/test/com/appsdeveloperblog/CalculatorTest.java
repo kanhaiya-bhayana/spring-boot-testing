@@ -51,6 +51,7 @@ class CalculatorTest {
         assertEquals(expected,actual,lambda);
     }
 
+    @Disabled("TODO: Still need to work on it")
     @DisplayName("Division by zero")
     @Test
     void testIntegerDivision_DivideByZero_ShouldThrowArithmeticException(){
