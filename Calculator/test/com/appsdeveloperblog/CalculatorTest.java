@@ -12,26 +12,13 @@ class CalculatorTest {
     // test<System Under Test>_<Condition or State Change>_<Expected Result>
 
     Calculator calculator;
-
-    @BeforeAll
-    static void setup(){
-        System.out.println("Executing @BeforeAll method.");
-    }
-    @AfterAll
-    static void cleanUp(){
-        System.out.println("Executing @AfterAll method.");
-    }
     @BeforeEach
      void beforeEachTestMethod(){
         calculator = new Calculator();
-        System.out.println("Executing @BeforeEach method.");
+//        System.out.println("Executing @BeforeEach method.");
     }
 
-    @AfterEach
-    void afterEachTestMethod(){
-        calculator = new Calculator();
-        System.out.println("Executing @AfterEach method.");
-    }
+
 
     @DisplayName("Test 4/2 = 2")
     @Test
@@ -51,9 +38,24 @@ class CalculatorTest {
         assertEquals(expected,actual,lambda);
     }
 
-    @Disabled("TODO: Still need to work on it")
+    // @Disabled("TODO: Still need to work on it")
     @DisplayName("Division by zero")
     @Test
     void testIntegerDivision_DivideByZero_ShouldThrowArithmeticException(){
+        // Arrange
+        int dividend = 4;
+        int divisor = 0;
+        String expectedExceptionMessage = "/ by zero";
+
+        // Act & Assert
+        ArithmeticException actualException = assertThrows(ArithmeticException.class, () -> {
+            // Act
+            calculator.integerDivision(dividend, divisor);
+        }, "Division by zero should have thrown an Arithmetic exception.");
+
+        // Assert
+        assertEquals(expectedExceptionMessage, actualException.getMessage(),
+                "Unexpected exception message");
+
     }
 }
