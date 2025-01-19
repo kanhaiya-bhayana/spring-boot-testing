@@ -15,19 +15,23 @@ class CalculatorTest {
     @DisplayName("Test 4/2 = 2")
     @Test
     void testIntegerDivision_FourDividedByTwo_ShouldReturnTwo() {
+        // Arrange - Given
         Calculator calculator = new Calculator();
         int expected = 2;
         int actual = 4/2;
+        Supplier<String> lambda = () -> expected + " not equal to " + actual;
+
+        // Act - When
         int result = calculator.integerDivision(4,2);
+
+        // Assert - Then
         assertEquals(expected, actual,
                 () -> expected + " not equal to " + actual);
-
-        Supplier<String> lambda = () -> expected + " not equal to " + actual;
         assertEquals(expected,actual,lambda);
     }
 
     @DisplayName("Division by zero")
     @Test
-    void testIntegerDivision_DivideByZero_ShouldThrowArithmaticException(){
+    void testIntegerDivision_DivideByZero_ShouldThrowArithmeticException(){
     }
 }
