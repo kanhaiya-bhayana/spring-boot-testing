@@ -1,8 +1,12 @@
 package com.appsdeveloperblog;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Test Math operations in Calculator Class")
@@ -57,5 +61,23 @@ class CalculatorTest {
         assertEquals(expectedExceptionMessage, actualException.getMessage(),
                 "Unexpected exception message");
 
+    }
+
+    @MethodSource()
+    @DisplayName("Test integer subtraction [minuend, subtrahend, expectedResult]")
+    @ParameterizedTest
+    void integerSubtraction(int minuend, int subtrahend, int expectedResult) {
+        calculator = new Calculator();
+        int actualResult = calculator.integerSubtraction(minuend,subtrahend);
+        assertEquals(expectedResult,actualResult,
+                () -> minuend + " - " + subtrahend + " did not produce " + expectedResult);
+    }
+
+
+    private static Stream<Arguments> integerSubtraction(){
+        return Stream.of(
+                Arguments.of(33,1,32),
+                Arguments.of(199,20,179)
+        );
     }
 }
