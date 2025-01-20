@@ -3,6 +3,7 @@ package com.appsdeveloperblog;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.function.Supplier;
@@ -14,7 +15,6 @@ class CalculatorTest {
 
     // naming convention
     // test<System Under Test>_<Condition or State Change>_<Expected Result>
-
     Calculator calculator;
     @BeforeEach
      void beforeEachTestMethod(){
@@ -32,7 +32,6 @@ class CalculatorTest {
         int expected = 2;
         int actual = 4/2;
         Supplier<String> lambda = () -> expected + " not equal to " + actual;
-
         // Act - When
         int result = calculator.integerDivision(4,2);
 
@@ -63,7 +62,11 @@ class CalculatorTest {
 
     }
 
-    @MethodSource()
+//    @MethodSource()
+    @CsvSource({
+            "33,1,32",
+            "199,20,179"
+    })
     @DisplayName("Test integer subtraction [minuend, subtrahend, expectedResult]")
     @ParameterizedTest
     void integerSubtraction(int minuend, int subtrahend, int expectedResult) {
